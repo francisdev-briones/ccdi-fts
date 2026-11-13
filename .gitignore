@@ -1,0 +1,30 @@
+
+# Private uploaded documents
+/uploads/proofs/
+/uploads/private/
+
+# Environment files and credentials
+.env
+.env.*
+!.env.example
+
+# Dependencies
+/vendor/
+/node_modules/
+
+# Temporary files
+*.log
+*.tmp
+
+# IDE settings
+.vscode/
+.idea/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Backups
+*.bak
+*.old

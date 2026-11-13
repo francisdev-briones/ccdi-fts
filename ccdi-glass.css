@@ -1,0 +1,159 @@
+/* CCDI glassmorphism blue theme.
+   Load AFTER your existing stylesheet so it overrides colors and surfaces.
+   Palette comes from the logo: deep navy + red accent, on a soft sky-blue backdrop. */
+
+:root {
+  --navy:      #0b1560;   /* logo navy, headings, buttons */
+  --navy-2:    #1d2f9a;   /* hover / links */
+  --ink:       #0f1b4d;   /* body text */
+  --ink-soft:  #4a5a93;   /* muted text */
+  --sky-1:     #eaf3ff;
+  --sky-2:     #c4dcff;
+  --sky-3:     #86b4ff;
+  --sky-4:     #4f8cf0;
+  --red:       #e10600;   /* logo dot: accents, rejected, overdue */
+  --green:     #0f9d6b;
+
+  --glass:        rgba(255, 255, 255, .58);
+  --glass-strong: rgba(255, 255, 255, .78);
+  --glass-border: rgba(255, 255, 255, .75);
+  --glass-shadow: 0 8px 32px rgba(11, 21, 96, .14);
+  --blur:         blur(16px) saturate(160%);
+  --radius:       16px;
+}
+
+/* ---- Backdrop ---- */
+html { background: var(--sky-2); }
+body {
+  min-height: 100vh;
+  color: var(--ink);
+  background:
+    radial-gradient(900px 600px at 8% -5%,  rgba(79, 140, 240, .55), transparent 60%),
+    radial-gradient(800px 600px at 100% 10%, rgba(134, 180, 255, .60), transparent 55%),
+    radial-gradient(700px 500px at 50% 110%, rgba(29, 47, 154, .25), transparent 60%),
+    linear-gradient(160deg, var(--sky-1) 0%, var(--sky-2) 55%, var(--sky-3) 100%);
+  background-attachment: fixed;
+}
+
+h1, h2, h3, h4 { color: var(--navy); }
+a { color: var(--navy-2); }
+.muted, .hint, small { color: var(--ink-soft); }
+
+/* ---- Glass surfaces ---- */
+.panel, .card, .auth, .login, .login-card, .stat, .stats > * {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  box-shadow: var(--glass-shadow);
+  -webkit-backdrop-filter: var(--blur);
+  backdrop-filter: var(--blur);
+}
+.panel { padding: 1.1rem 1.25rem; }
+
+/* ---- Top bar / navigation ---- */
+header, nav, .nav, .topbar, .site-header {
+  background: var(--glass-strong);
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: 0 4px 24px rgba(11, 21, 96, .10);
+  -webkit-backdrop-filter: var(--blur);
+  backdrop-filter: var(--blur);
+  color: var(--navy);
+}
+header a, nav a, .nav a, .topbar a { color: var(--navy); font-weight: 600; }
+header a:hover, nav a:hover, .nav a:hover, .topbar a:hover { color: var(--red); }
+
+/* Logo: dark navy artwork, so it always sits on a light frosted chip */
+.brand-logo, .logo, header img, nav img {
+  height: 44px;
+  width: auto;
+  display: block;
+}
+.brand { display: inline-flex; align-items: center; gap: .6rem; color: var(--navy); }
+.brand-chip {
+  display: inline-flex;
+  padding: 4px 8px;
+  background: rgba(255, 255, 255, .85);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+}
+
+/* ---- Buttons ---- */
+.btn, button.btn, input[type=submit], button[type=submit] {
+  background: linear-gradient(180deg, var(--navy-2), var(--navy));
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, .25);
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(11, 21, 96, .25);
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+}
+.btn:hover { filter: brightness(1.12); transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+.btn.ok { background: linear-gradient(180deg, #17b67f, var(--green)); }
+.btn.no { background: linear-gradient(180deg, #f0443c, #c4160f); }
+.btn[disabled], .btn:disabled { opacity: .5; cursor: not-allowed; transform: none; filter: none; }
+
+/* ---- Form fields ---- */
+input, select, textarea {
+  background: rgba(255, 255, 255, .72);
+  color: var(--ink);
+  border: 1px solid rgba(11, 21, 96, .18);
+  border-radius: 10px;
+}
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--sky-4);
+  box-shadow: 0 0 0 3px rgba(79, 140, 240, .30);
+  background: #fff;
+}
+label { color: var(--navy); }
+
+/* ---- Tables ---- */
+table { background: transparent; color: var(--ink); }
+th {
+  background: rgba(79, 140, 240, .14);
+  color: var(--navy);
+  border-bottom: 1px solid rgba(11, 21, 96, .12);
+}
+td { border-bottom: 1px solid rgba(11, 21, 96, .08); }
+tbody tr:hover { background: rgba(255, 255, 255, .45); }
+tr.sub td { background: rgba(79, 140, 240, .12); font-weight: 700; color: var(--navy); }
+
+/* ---- Status pills and notices ---- */
+.pill {
+  background: rgba(79, 140, 240, .18);
+  color: var(--navy);
+  border: 1px solid rgba(79, 140, 240, .35);
+  border-radius: 999px;
+}
+.pill.ok, .pill.good  { background: rgba(15, 157, 107, .16); color: #086847; border-color: rgba(15, 157, 107, .4); }
+.pill.warn            { background: rgba(245, 158, 11, .18); color: #8a5300; border-color: rgba(245, 158, 11, .45); }
+.pill.bad             { background: rgba(225, 6, 0, .12);   color: #a30500; border-color: rgba(225, 6, 0, .35); }
+
+.flash {
+  background: var(--glass-strong);
+  border: 1px solid var(--glass-border);
+  border-left: 4px solid var(--sky-4);
+  border-radius: 12px;
+  color: var(--navy);
+  -webkit-backdrop-filter: var(--blur);
+  backdrop-filter: var(--blur);
+}
+.flash.err { border-left-color: var(--red); color: #8a0400; }
+
+/* ---- Progress meter ---- */
+.meter { background: rgba(11, 21, 96, .12); border-radius: 999px; overflow: hidden; }
+.meter > span { background: linear-gradient(90deg, var(--sky-4), var(--navy-2)); border-radius: 999px; }
+
+.next { color: var(--navy); font-weight: 600; }
+
+/* ---- Fallback when backdrop-filter is unsupported ---- */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .panel, .card, .auth, .login, .login-card, .stat, .stats > *,
+  header, nav, .nav, .topbar, .site-header, .flash { background: rgba(255, 255, 255, .92); }
+}
+
+@media print {
+  body { background: #fff; }
+  .panel, header, nav { box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; background: #fff; }
+}
